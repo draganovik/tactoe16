@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import App from "./App.vue";
+import GameUI from "./GameUI.vue";
 import "./registerServiceWorker";
 
-createApp(App).mount("#app");
+createApp(GameUI).mount("#app");

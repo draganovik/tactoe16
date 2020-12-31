@@ -1,58 +1,55 @@
-import { Role } from "/gamePlay.js";
-
-export default class TacTouAI {
+class GameAI {
   constructor(assignedRole) {
     this.aiRole = assignedRole;
-    if (this.aiRole == Role.X) {
-      this.enemyRole = Role.O;
-    } else {
-      this.enemyRole = Role.X;
-    }
+    this.enemyRole = -assignedRole;
   }
   goTo(gameworld) {
-    let fields = this.unclaimedFields();
-    if (fields.lenght == 16) {
-      return Math.random(fields);
+    let fields = gameworld.unclaimedFields();
+    if (fields.length != 0) {
+      return fields[Math.floor(Math.random() * fields.length)];
     } else {
-      return this.simulateMove(gameworld, this.aiRole).bestField;
+      let r = this.simulateMove(gameworld, this.aiRole);
+      return r.field;
     }
   }
   simulateMove(simulation, player) {
     let maxPlayer = this.aiRole;
     let solution = {};
-    if (simulation.winner == this.enemyRole) {
+
+    simulation.lookForWin();
+    if (simulation.winner == -player) {
       return {
-        field: null,
+        field: 0,
         score:
-          (this.enemyRole == maxPlayer ? 1 : -1) *
-            simulation.unclaimedFields().lenght +
-          1
+          (-player == maxPlayer ? 1 : -1) *
+          (simulation.unclaimedFields().length + 1)
       };
-    } else if (!simulation.unclaimedFields().lenght) {
+    } else if (!simulation.unclaimedFields().length) {
       return {
-        field: null,
+        field: 0,
         score: 0
       };
     }
 
     if (player == maxPlayer) {
       solution = {
-        field: null,
-        score: -1000
+        field: 0,
+        score: -10000
       };
     } else {
       solution = {
-        field: null,
-        score: -1000
+        field: 0,
+        score: 10000
       };
     }
-
     simulation.unclaimedFields().forEach(simField => {
+      //console.log(simField);
       simulation.claim(simField, player);
       let simulationResult = this.simulateMove(simulation, -player);
 
       simulation.unclaim(simField);
       simulation.winner = 0;
+      simulation.lookForWin();
       simulationResult.field = simField;
 
       if (player == maxPlayer) {
@@ -67,3 +64,4 @@ export default class TacTouAI {
     return solution;
   }
 }
+export { GameAI };
