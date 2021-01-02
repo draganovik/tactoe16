@@ -3,27 +3,11 @@
 ## Project setup
 
 ```
-npm install
+native web ready
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-npm run serve
+no need
 ```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

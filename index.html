@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TacToe16</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="js/playerGraphicsX.js"></script>
+    <script type="text/javascript" src="js/playerGraphicsO.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="shortcut icon" type="image/ico" href="/assets/TacToe16.ico" />
+    <link rel="shortcut icon" type="image/svg" href="/assets/TacToe16.svg" />
+  </head>
+  <body onload="NewGame();">
+    <img class="game-logo" src="assets/TacToe16.svg" alt="TacToe16 game logo" />
+    <p id="notification-bar">Loading the game...</p>
+    <main class="board">
+      <figure id="f0" onclick="MakeMove(0)"></figure>
+      <figure id="f1" onclick="MakeMove(1)"></figure>
+      <figure id="f2" onclick="MakeMove(2)"></figure>
+      <figure id="f3" onclick="MakeMove(3)"></figure>
+      <figure id="f4" onclick="MakeMove(4)"></figure>
+      <figure id="f5" onclick="MakeMove(5)"></figure>
+      <figure id="f6" onclick="MakeMove(6)"></figure>
+      <figure id="f7" onclick="MakeMove(7)"></figure>
+      <figure id="f8" onclick="MakeMove(8)"></figure>
+      <figure id="f9" onclick="MakeMove(9)"></figure>
+      <figure id="f10" onclick="MakeMove(10)"></figure>
+      <figure id="f11" onclick="MakeMove(11)"></figure>
+      <figure id="f12" onclick="MakeMove(12)"></figure>
+      <figure id="f13" onclick="MakeMove(13)"></figure>
+      <figure id="f14" onclick="MakeMove(14)"></figure>
+      <figure id="f15" onclick="MakeMove(15)"></figure>
+    </main>
+    <button onclick="NewGame()">New Game</button>
+  </body>
+</html>
