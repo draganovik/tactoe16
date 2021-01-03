@@ -1,0 +1,49 @@
+{
+  "name": "TacToe16",
+  "short_name": "TacToe16",
+  "description": "This is a 4x4 Tic-Tac-Toe game against a computer on the web, try to beat it!",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "English",
+  "background_color": "#374859",
+  "theme_color": "#ffa143",
+  "icons": [
+    {
+      "src": "assets/TacToe16.svg",
+      "sizes": "150x150",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

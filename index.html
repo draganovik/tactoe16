@@ -3,16 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffa143" />
+    <meta
+      name="description"
+      content="This is a 4x4 Tic-Tac-Toe game against a computer on the web, try to beat it!"
+    />
+    <meta name="author" content="Mladen Draganović" />
+    <meta
+      name="keywords"
+      content="Tic-Tac-Toe, iks oks, Iks oks, tic tac toe, tac toe 16, tic tac toe 16, tactoe16"
+    />
     <title>TacToe16</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <script type="text/javascript" src="js/graphicsX.js"></script>
-    <script type="text/javascript" src="js/graphicsO.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
     <link rel="shortcut icon" type="image/ico" href="/assets/TacToe16.ico" />
     <link rel="shortcut icon" type="image/svg" href="/assets/TacToe16.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="assets/apple-icon-192x192.png" />
   </head>
   <body onload="NewGame();">
-    <img class="game-logo" src="assets/TacToe16.svg" alt="TacToe16 game logo" />
+    <img
+      class="game-logo"
+      src="assets/TacToe16.svg"
+      alt="TacToe16 game logo"
+      width="96"
+      height="96"
+    />
     <p id="notification-bar">Loading the game...</p>
     <main class="board">
       <figure id="f0" onclick="MakeMove(0)"></figure>
@@ -33,5 +48,16 @@
       <figure id="f15" onclick="MakeMove(15)"></figure>
     </main>
     <button onclick="NewGame()">New Game</button>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((reg) => console.log("Service Worker registered"))
+          .catch((err) => console.log("ERROR: Service Worker not registered"));
+      }
+    </script>
+    <script type="text/javascript" src="js/graphicsX.js"></script>
+    <script type="text/javascript" src="js/graphicsO.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
   </body>
 </html>
