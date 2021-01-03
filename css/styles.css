@@ -17,16 +17,15 @@ body {
   height: 100vh;
 }
 .game-logo {
-  height: 6rem;
-  min-height: 120px;
-  margin-top: 1rem;
+  width: 6rem;
 }
 #notification-bar {
   width: 18.5rem;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 1rem 0;
   padding: 0.3rem 0;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   border: 1px solid #1c1c1c;
+  transition-duration: 0.3s;
 }
 .board {
   display: grid;
@@ -35,6 +34,15 @@ body {
   padding: 0.5rem;
   background-color: #1c1c1c;
   border-radius: 0.5rem;
+}
+.orange {
+  background-color: #b07131;
+}
+.blue {
+  background-color: #249bc4;
+}
+.red {
+  background-color: #ba2b2b;
 }
 figure {
   margin: 0;
@@ -45,10 +53,6 @@ figure {
   align-items: center;
   transition-duration: 0.1s;
   overflow: hidden;
-}
-figure:hover {
-  background-color: #7491b0;
-  cursor: pointer;
 }
 figure svg {
   height: 100%;
@@ -65,9 +69,22 @@ button {
   font-weight: bold;
   color: #e1e6eb;
   font-size: 0.8rem;
+  outline: none;
 }
-button:hover {
-  cursor: pointer;
+figure:active {
+  background-color: #7491b0;
+}
+button:active {
+  background-color: #292929;
+}
+@media (hover: hover) and (pointer: fine) {
+  button:hover {
+    cursor: pointer;
+  }
+  figure:hover {
+    background-color: #7491b0;
+    cursor: pointer;
+  }
 }
 @media screen and (max-width: 400px) {
   html,

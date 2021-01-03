@@ -1,3 +1,4 @@
+// Global variables
 var board = new Array();
 var BOARD_SIZE = 16;
 var UNOCCUPIED = " ";
@@ -6,87 +7,137 @@ var COMPUTER_PLAYER;
 var active_turn;
 var choice;
 
+// This function sets up the enviroment
 function NewGame() {
+  CleanBoard();
+  ShufflePlayOrder();
+}
+
+// Clean the fields in HTML and resets board array
+function CleanBoard() {
   for (i = 0; i < BOARD_SIZE; i++) {
     board[i] = UNOCCUPIED;
-    document.getElementById("f" + i).innerHTML = "";
-  }
-
-  var notification_bar = document.getElementById("notification-bar");
-  let random_turn = Math.round(Math.random() * 2);
-  active_turn = random_turn ? "USER" : "COMPUTER";
-  notification_bar.innerHTML = random_turn
-    ? "Your turn!"
-    : "Computer is thinking.";
-  USER_PLAYER = random_turn ? "X" : "O";
-  COMPUTER_PLAYER = random_turn ? "O" : "X";
-  if (!random_turn) {
-    MakeMoveComputer();
+    document.getElementById(`f${i}`).innerHTML = "";
   }
 }
 
-function MakeMove(pos) {
-  if (!GameOver(board) && board[pos] === UNOCCUPIED) {
-    RenderMove(pos, USER_PLAYER);
-    board[pos] = USER_PLAYER;
-    if (!GameOver(board)) {
-      var notification_bar = document.getElementById("notification-bar");
-      active_turn = "COMPUTER";
-      notification_bar.innerHTML = "Computer is thinking.";
+// Picks a random player between the USER and COMPUTER
+function ShufflePlayOrder() {
+  let random_turn = Math.round(Math.random() * 1);
+  active_turn = random_turn ? "USER" : "COMPUTER";
+  ShowMessage(
+    random_turn ? "You are playing first!" : "Computer is playing first."
+  );
+  USER_PLAYER = random_turn ? "X" : "O";
+  COMPUTER_PLAYER = random_turn ? "O" : "X";
+  if (!random_turn) {
+    setTimeout(() => {
       MakeMoveComputer();
+    }, 600);
+  }
+}
+
+// Displays game status messages to USER in UI
+function ShowMessage(message, winner) {
+  let notification_bar = document.getElementById("notification-bar");
+  notification_bar.innerHTML = message;
+  switch (winner) {
+    case " ":
+      notification_bar.classList.add("orange");
+      break;
+    case "O":
+      notification_bar.classList.add("red");
+      break;
+    case "X":
+      notification_bar.classList.add("blue");
+      break;
+    default:
+      if (notification_bar) {
+        notification_bar.classList.remove("blue");
+        notification_bar.classList.remove("orange");
+        notification_bar.classList.remove("red");
+      }
+      break;
+  }
+}
+
+// Universal function for seting USER and COMPUTER moves
+function MakeMove(position) {
+  let PLAYER = ChangeTurn();
+  if (!GameOver(board) && board[position] === UNOCCUPIED) {
+    RenderMove(position, PLAYER);
+    board[position] = PLAYER;
+    if (!GameOver(board)) {
+      if (active_turn == "COMPUTER") {
+        ShowMessage("Computer is thinking...");
+        setTimeout(() => {
+          MakeMoveComputer(position);
+        }, 600);
+      } else {
+        ShowMessage("Your turn!");
+      }
     }
   }
 }
 
+// Render/Show played move in HTML
 function RenderMove(position, player) {
   return new Promise(function () {
     document
-      .getElementById("f" + position)
-      .insertAdjacentHTML(
-        "beforeend",
-        player == "X" ? PlayerGraphicsX : PlayerGraphicsO
-      );
+      .getElementById(`f${position}`)
+      .insertAdjacentHTML("beforeend", player == "X" ? graphicsX : graphicsO);
   });
 }
 
-function MakeMoveComputer() {
-  var start, end, time;
-  start = new Date().getTime() / 1000;
+//#region COMPUTER AI logic
+
+// Function for triggering COMPUTER move
+function MakeMoveComputer(humanMove) {
   let availableMoves = GetAvailableMoves(board);
-  if (availableMoves.length > 13) {
-    let randomPosition = Math.floor(Math.random() * availableMoves.length - 1);
-    choice = availableMoves[randomPosition];
+  if (availableMoves.length == 16) {
+    choice = availableMoves[Math.round(Math.random() * availableMoves.length)];
+  } else if (availableMoves.length > 13 && humanMove != undefined) {
+    choice = getStaticMove(humanMove);
   } else {
+    console.log("Alpha-Beta Minimax takeover!");
     alphaBetaMinimax(board, 0, -Infinity, +Infinity);
   }
-  end = new Date().getTime() / 1000;
-  time = end - start;
-  console.log(time + " seconds");
-  // Failsafe for Math.random and just in case minimax beaks
-  var move = choice ? choice : availableMoves[0];
-  console.log(move);
-  RenderMove(move, COMPUTER_PLAYER);
-  board[move] = COMPUTER_PLAYER;
+  // FAILSAFE if setting choice breaks get the first UNOCCUPIED field
+  MakeMove(choice ? choice : availableMoves[0]);
   choice = [];
-  active_turn = "USER";
-  if (!GameOver(board)) {
-    var notification_bar = document.getElementById("notification-bar");
-    notification_bar.innerHTML = "Your turn!";
+}
+
+// Hardcoded initial moves (to prevent USER from creating deadly 3 fields configuration)
+function getStaticMove(humanMove) {
+  if (humanMove < 2 || humanMove == 4) {
+    return board[5] == UNOCCUPIED ? 5 : availableMoves[5];
+  } else if (humanMove < 4 || humanMove == 7) {
+    return board[6] == UNOCCUPIED ? 6 : availableMoves[6];
+  } else if (humanMove == 5) {
+    return board[4] == UNOCCUPIED ? 4 : 1;
+  } else if (humanMove < 4 || humanMove == 7) {
+    return board[6] == UNOCCUPIED ? 6 : availableMoves[6];
+  } else if (humanMove == 6) {
+    return board[2] == UNOCCUPIED ? 2 : 7;
+  } else if (humanMove > 13 || humanMove == 11) {
+    return board[10] == UNOCCUPIED ? 10 : availableMoves[10];
+  } else if (humanMove == 10) {
+    return board[11] == UNOCCUPIED ? 11 : 14;
+  } else if (humanMove == 9) {
+    return board[13] == UNOCCUPIED ? 13 : availableMoves[13];
+  } else {
+    return 9;
   }
 }
 
-function GameScore(game, depth) {
-  var score = CheckForWinner(game);
-  if (score === 1) return 0;
-  else if (score === 2) return depth - 17;
-  else if (score === 3) return 17 - depth;
-}
-
+// Alpha–beta pruning algorithm for searching the best move
 function alphaBetaMinimax(node, depth, alpha, beta) {
   if (CheckForWinner(node) !== 0) return GameScore(node, depth);
+
   depth += 1;
   var availableMoves = GetAvailableMoves(node);
   var move, result, possible_game;
+
   if (active_turn === "COMPUTER") {
     for (var i = 0; i < availableMoves.length; i++) {
       move = availableMoves[i];
@@ -118,30 +169,44 @@ function alphaBetaMinimax(node, depth, alpha, beta) {
   }
 }
 
+// Gives a gameworld rating based on number of moves and outcome of the game
+function GameScore(game, depth) {
+  var score = CheckForWinner(game);
+  // Tie
+  if (score === 1) return 0;
+  // Computer wins
+  else if (score === 2) return depth - 16;
+  // User wins
+  else if (score === 3) return 16 - depth;
+}
+
+// Cleans the possible move AI created in alphaBetaMinimax for simulated gameworld nodes
 function UndoMove(game, move) {
   game[move] = UNOCCUPIED;
   ChangeTurn();
   return game;
 }
 
+// Simulates gameworld with a possible move
 function GetNewState(move, game) {
-  var piece = ChangeTurn();
-  game[move] = piece;
+  game[move] = ChangeTurn();
   return game;
 }
 
+//#endregion
+
+// End current player turn and switch to other player
 function ChangeTurn() {
-  var piece;
   if (active_turn === "COMPUTER") {
-    piece = COMPUTER_PLAYER;
     active_turn = "USER";
+    return COMPUTER_PLAYER;
   } else {
-    piece = USER_PLAYER;
     active_turn = "COMPUTER";
+    return USER_PLAYER;
   }
-  return piece;
 }
 
+// Gets a array of moves not claimed by eather player
 function GetAvailableMoves(game) {
   var possibleMoves = new Array();
   for (var i = 0; i < BOARD_SIZE; i++) {
@@ -150,6 +215,7 @@ function GetAvailableMoves(game) {
   return possibleMoves;
 }
 
+// Checks if given gameworld has a winning combination
 function CheckForWinner(game) {
   // Check for square wins
   for (i = 0; i <= 10; i++) {
@@ -171,6 +237,7 @@ function CheckForWinner(game) {
     )
       return 3;
   }
+
   // Check for horizontal wins
   for (i = 0; i <= 12; i += 4) {
     if (
@@ -239,18 +306,20 @@ function CheckForWinner(game) {
   return 1;
 }
 
+// Sets the endgame enviroment
 function GameOver(game) {
-  if (CheckForWinner(game) === 0) {
-    return false;
-  } else if (CheckForWinner(game) === 1) {
-    var notification_bar = document.getElementById("notification-bar");
-    notification_bar.innerHTML = "It is a tie.";
-  } else if (CheckForWinner(game) === 2) {
-    var notification_bar = document.getElementById("notification-bar");
-    notification_bar.innerHTML = "You have won! Congratulations!";
-  } else {
-    var notification_bar = document.getElementById("notification-bar");
-    notification_bar.innerHTML = "The computer has won.";
+  switch (CheckForWinner(game)) {
+    case 1:
+      ShowMessage("It's a tie!", UNOCCUPIED);
+      break;
+    case 2:
+      ShowMessage("You win! Congratulations!", USER_PLAYER);
+      break;
+    case 3:
+      ShowMessage("Computer wins this time!", COMPUTER_PLAYER);
+      break;
+    default:
+      return false;
   }
   return true;
 }
