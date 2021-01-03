@@ -97,7 +97,7 @@ function MakeMoveComputer(humanMove) {
   if (availableMoves.length == 16) {
     choice = availableMoves[Math.round(Math.random() * availableMoves.length)];
   } else if (availableMoves.length > 13 && humanMove != undefined) {
-    choice = getStaticMove(humanMove);
+    choice = getStaticMove(humanMove, availableMoves);
   } else {
     console.log("Alpha-Beta Minimax takeover!");
     alphaBetaMinimax(board, 0, -Infinity, +Infinity);
@@ -108,7 +108,7 @@ function MakeMoveComputer(humanMove) {
 }
 
 // Hardcoded initial moves (to prevent USER from creating deadly 3 fields configuration)
-function getStaticMove(humanMove) {
+function getStaticMove(humanMove, availableMoves) {
   if (humanMove < 2 || humanMove == 4) {
     return board[5] == UNOCCUPIED ? 5 : availableMoves[5];
   } else if (humanMove < 4 || humanMove == 7) {
