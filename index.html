@@ -30,22 +30,22 @@
     />
     <p id="notification-bar">Loading the game...</p>
     <main class="board">
-      <figure id="f0" onclick="MakeMove(0)"></figure>
-      <figure id="f1" onclick="MakeMove(1)"></figure>
-      <figure id="f2" onclick="MakeMove(2)"></figure>
-      <figure id="f3" onclick="MakeMove(3)"></figure>
-      <figure id="f4" onclick="MakeMove(4)"></figure>
-      <figure id="f5" onclick="MakeMove(5)"></figure>
-      <figure id="f6" onclick="MakeMove(6)"></figure>
-      <figure id="f7" onclick="MakeMove(7)"></figure>
-      <figure id="f8" onclick="MakeMove(8)"></figure>
-      <figure id="f9" onclick="MakeMove(9)"></figure>
-      <figure id="f10" onclick="MakeMove(10)"></figure>
-      <figure id="f11" onclick="MakeMove(11)"></figure>
-      <figure id="f12" onclick="MakeMove(12)"></figure>
-      <figure id="f13" onclick="MakeMove(13)"></figure>
-      <figure id="f14" onclick="MakeMove(14)"></figure>
-      <figure id="f15" onclick="MakeMove(15)"></figure>
+      <figure id="f0" onclick="PlayUser(0)"></figure>
+      <figure id="f1" onclick="PlayUser(1)"></figure>
+      <figure id="f2" onclick="PlayUser(2)"></figure>
+      <figure id="f3" onclick="PlayUser(3)"></figure>
+      <figure id="f4" onclick="PlayUser(4)"></figure>
+      <figure id="f5" onclick="PlayUser(5)"></figure>
+      <figure id="f6" onclick="PlayUser(6)"></figure>
+      <figure id="f7" onclick="PlayUser(7)"></figure>
+      <figure id="f8" onclick="PlayUser(8)"></figure>
+      <figure id="f9" onclick="PlayUser(9)"></figure>
+      <figure id="f10" onclick="PlayUser(10)"></figure>
+      <figure id="f11" onclick="PlayUser(11)"></figure>
+      <figure id="f12" onclick="PlayUser(12)"></figure>
+      <figure id="f13" onclick="PlayUser(13)"></figure>
+      <figure id="f14" onclick="PlayUser(14)"></figure>
+      <figure id="f15" onclick="PlayUser(15)"></figure>
     </main>
     <button onclick="NewGame()">New Game</button>
     <script>
@@ -56,8 +56,7 @@
           .catch((err) => console.log("ERROR: Service Worker not registered"));
       }
     </script>
-    <script type="text/javascript" src="js/graphicsX.js"></script>
-    <script type="text/javascript" src="js/graphicsO.js"></script>
+    <script type="text/javascript" src="js/player_graphics.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
   </body>
 </html>

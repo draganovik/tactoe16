@@ -1,11 +1,10 @@
-var cacheName = "tactoe16PWA-v2";
+var cacheName = "tactoe16PWA-v1";
 var assets = [
   "/",
   "/index.html",
   "/manifest.json",
   "/js/game.js",
-  "/js/graphicsO.js",
-  "/js/graphicsX.js",
+  "/js/player_graphics.js",
   "/css/styles.css",
   "/assets/TacToe16.svg",
   "/assets/TacToe16.ico",

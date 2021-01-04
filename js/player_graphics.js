@@ -1,6 +1,26 @@
+// Vector graphics for displaying "O" player
+var graphicsO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52.68 50.95">
+    <defs>
+        <style>
+            .ocls-1 {
+                fill: #7a1f1f;
+            }
+
+            .ocls-2 {
+                fill: #c33;
+            }
+        </style>
+    </defs>
+        <path class="ocls-1"
+            d="M32.89,12.76a13.94,13.94,0,0,1,3.83,10.13c0,8-5.36,13.66-13,13.66A12.66,12.66,0,0,1,14.54,33L29.22,50.29l20-25Z" />
+        <path class="ocls-1"
+            d="M41.16,6.61C37,2.43,31,0,23.79,0,9.71,0,0,9.35,0,22.89A22.34,22.34,0,0,0,6.27,39.12l5.22,5.23c-4-4,4.73-32.06,4.73-32.06s25-1,30.17-.45Z" />
+        <path class="ocls-2"
+            d="M29,5.23c14.07,0,23.7,9.35,23.66,22.9S43,51,28.89,51,5.19,41.66,5.23,28.13,14.93,5.23,29,5.23Zm-.1,36.56c7.66,0,13-5.64,13-13.66S36.66,14.4,29,14.4,16,20,16,28.13s5.29,13.66,13,13.66" />
+</svg>`;
+
 // Vector graphics for displaying "X" player
-var graphicsX = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.2 47.95">
+var graphicsX = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.2 47.95">
     <defs>
         <style>
             .xcls-1 {
