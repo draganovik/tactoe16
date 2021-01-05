@@ -20,7 +20,7 @@ class Computer {
   static #choice = [];
 
   // PRIVATE: Simulation level limit used in COMPUTER algorithm
-  static #depthLimit = 8;
+  static #depthLimit = 9;
 
   // MAIN: function for triggering COMPUTER algorithm
   static Play() {
