@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffa143" />
+    <meta
+      name="description"
+      content="This is a 4x4 Tic-Tac-Toe game against a computer on the web, try to beat it!"
+    />
+    <meta name="author" content="Mladen Draganović" />
+    <meta
+      name="keywords"
+      content="Tic-Tac-Toe, iks oks, Iks oks, tic tac toe, tac toe 16, tic tac toe 16, tactoe16"
+    />
+    <title>TacToe16</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="shortcut icon" type="image/ico" href="/assets/TacToe16.ico" />
+    <link rel="shortcut icon" type="image/svg" href="/assets/TacToe16.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="assets/apple-icon-192x192.png" />
+  </head>
+  <body onload="NewGame();">
+    <img
+      class="game-logo"
+      src="assets/TacToe16.svg"
+      alt="TacToe16 game logo"
+      width="96"
+      height="96"
+    />
+    <p id="notification-bar">Loading the game...</p>
+    <main class="board">
+      <figure id="f0" onclick="PlayUser(0)"></figure>
+      <figure id="f1" onclick="PlayUser(1)"></figure>
+      <figure id="f2" onclick="PlayUser(2)"></figure>
+      <figure id="f3" onclick="PlayUser(3)"></figure>
+      <figure id="f4" onclick="PlayUser(4)"></figure>
+      <figure id="f5" onclick="PlayUser(5)"></figure>
+      <figure id="f6" onclick="PlayUser(6)"></figure>
+      <figure id="f7" onclick="PlayUser(7)"></figure>
+      <figure id="f8" onclick="PlayUser(8)"></figure>
+      <figure id="f9" onclick="PlayUser(9)"></figure>
+      <figure id="f10" onclick="PlayUser(10)"></figure>
+      <figure id="f11" onclick="PlayUser(11)"></figure>
+      <figure id="f12" onclick="PlayUser(12)"></figure>
+      <figure id="f13" onclick="PlayUser(13)"></figure>
+      <figure id="f14" onclick="PlayUser(14)"></figure>
+      <figure id="f15" onclick="PlayUser(15)"></figure>
+    </main>
+    <button id="btnNewGame" onclick="NewGame()">New Game</button>
+    <script type="text/javascript" src="js/graphics.js"></script>
+    <script type="text/javascript" src="js/shared.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script>
+      // This will register /sw.js
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((reg) => console.log("Service Worker registered"))
+          .catch((err) => console.log("ERROR: Service Worker not registered"));
+      }
+    </script>
+  </body>
+</html>

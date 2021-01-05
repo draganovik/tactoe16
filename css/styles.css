@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin: 0;
+  background-color: #374859;
+  color: #e1e6eb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.game-logo {
+  width: 6rem;
+  height: 6rem;
+}
+#notification-bar {
+  width: 18.5rem;
+  margin: 1.5rem 0 1rem 0;
+  padding: 0.3rem 0;
+  border-radius: 0.3rem;
+  border: 1px solid #1c1c1c;
+  transition-duration: 0.1s;
+}
+.board {
+  display: grid;
+  grid-template: repeat(4, 4rem) / repeat(4, 4rem);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: #1c1c1c;
+  border-radius: 0.5rem;
+}
+.orange {
+  background-color: #b07131;
+  font-weight: bold;
+}
+.blue {
+  background-color: #249bc4;
+  font-weight: bold;
+}
+.red {
+  background-color: #ba2b2b;
+  font-weight: bold;
+}
+figure {
+  margin: 0;
+  display: flex;
+  background-color: #506d8a;
+  border-radius: 0.2rem;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 0.1s;
+  overflow: hidden;
+}
+figure svg {
+  height: 100%;
+  padding: 0.54rem;
+  animation: expand 0.5s ease-in-out;
+}
+button {
+  margin: 1rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.2rem;
+  border: 1px solid transparent;
+  background-color: #1c1c1c;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #e1e6eb;
+  font-size: 0.8rem;
+  outline: none;
+  transition-duration: 0.3s;
+}
+button:disabled,
+button[disabled] {
+  color: #727272;
+  background-color: #373737;
+}
+figure:active {
+  background-color: #7491b0;
+}
+button:active {
+  background-color: #292929;
+}
+@media (hover: hover) and (pointer: fine) {
+  button:hover {
+    cursor: pointer;
+  }
+  figure:hover {
+    background-color: #7491b0;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 400px) {
+  html,
+  body,
+  #app {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 400px) {
+  html,
+  body,
+  #app {
+    font-size: 20px;
+  }
+}
+@keyframes expand {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes shrink {
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
