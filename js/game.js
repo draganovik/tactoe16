@@ -127,7 +127,7 @@ function RenderMove(position, player) {
 function GameOver(board) {
   switch (CheckForWinner(board)) {
     case 1:
-      ShowMessage("It's tie!", UNOCCUPIED);
+      ShowMessage("It's a tie!", UNOCCUPIED);
       break;
     case 2:
       ShowMessage("You win! Congratulations!", USER_PLAYER);
