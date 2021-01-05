@@ -1,4 +1,4 @@
-# TacToe16 - Dresscode Challenge Christmas Submission
+# TacToe16 - Christmas Challenge Submission
 
 ### Kako pokrenuti na lokalnoj mašini:
 
