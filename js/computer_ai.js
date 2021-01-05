@@ -40,22 +40,26 @@ class Computer {
   // PRIVATE: Alpha–beta pruning algorithm for searching the best move
   static #alphaBetaMinimax(node, depth, alpha, beta) {
     // If game is over or too long, return simulation score
-    if (CheckForWinner(node) !== 0 || depth > this.#depthLimit)
-      return this.#gameScore(node, depth);
+    var gameState = CheckForWinner(node);
+    if (gameState !== 0 || depth > this.#depthLimit)
+      return this.#gameScore(gameState, depth);
 
     // Simulation setup
     depth += 1;
     var availableMoves = GetAvailableMoves(node);
-    var move, result, possible_game;
+    var move, result;
 
     if (ACTIVE_TURN === "COMPUTER") {
       // Run alphaBetaMinimax for every UNOCCUPIED move
       for (var i = 0; i < availableMoves.length; i++) {
         move = availableMoves[i];
-        // Create new BOARD simulation (node) with added move
-        possible_game = this.#getNewState(move, node);
         // Get new simulation score
-        result = this.#alphaBetaMinimax(possible_game, depth, alpha, beta);
+        result = this.#alphaBetaMinimax(
+          this.#getNewState(move, node),
+          depth,
+          alpha,
+          beta
+        );
         // Reset node
         node = this.#undoMove(node, move);
         // Pick best result
@@ -71,10 +75,13 @@ class Computer {
       for (var i = 0; i < availableMoves.length; i++) {
         // Run alphaBetaMinimax for every UNOCCUPIED move
         move = availableMoves[i];
-        // Create new BOARD simulation (node) with added move
-        possible_game = this.#getNewState(move, node);
         // Get simulation score
-        result = this.#alphaBetaMinimax(possible_game, depth, alpha, beta);
+        result = this.#alphaBetaMinimax(
+          this.#getNewState(move, node),
+          depth,
+          alpha,
+          beta
+        );
         // Reset node
         node = this.#undoMove(node, move);
         // Pick best result
@@ -90,16 +97,21 @@ class Computer {
   }
 
   // PRIVATE: Gives a simulated board rating based on number of moves and winner
-  static #gameScore(board, depth) {
-    var score = CheckForWinner(board);
-    // Tie
-    if (score === 1) return 0;
-    // COMPUTER wins
-    else if (score === 2) return depth - 16;
-    // USER wins
-    else if (score === 3) return 16 - depth;
-    // Simulation is too deep
-    else if (score === 0) return 0;
+  static #gameScore(gameState, depth) {
+    switch (gameState) {
+      case 1:
+        // Tie
+        return 0;
+      case 2:
+        // COMPUTER wins
+        return depth - 16;
+      case 3:
+        // USER wins
+        return 16 - depth;
+      case 0:
+        // Simulation is too deep
+        return 0;
+    }
   }
 
   // PRIVATE: Cleans the move COMPUTER created in #alphaBetaMinimax for simulated board

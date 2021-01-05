@@ -33,24 +33,10 @@ function GetPlayerSymbol() {
 
 // Checks if given board has a winning combination
 function CheckForWinner(board) {
-  // Check for square wins
-  for (i = 0; i <= 10; i++) {
-    if (i == 3 || i == 7) {
-      i++;
-    }
-    if (
-      board[i] != UNOCCUPIED &&
-      board[i] === board[i + 1] &&
-      board[i] === board[i + 4] &&
-      board[i] === board[i + 5]
-    )
-      return board[i] == USER_PLAYER ? 2 : 3;
-  }
-
   // Check for horizontal wins
   for (i = 0; i <= 12; i += 4) {
     if (
-      board[i] != UNOCCUPIED &&
+      board[i] !== UNOCCUPIED &&
       board[i] === board[i + 1] &&
       board[i] === board[i + 2] &&
       board[i] === board[i + 3]
@@ -61,7 +47,7 @@ function CheckForWinner(board) {
   // Check for vertical wins
   for (i = 0; i <= 3; i++) {
     if (
-      board[i] != UNOCCUPIED &&
+      board[i] !== UNOCCUPIED &&
       board[i] === board[i + 4] &&
       board[i] === board[i + 8] &&
       board[i] === board[i + 12]
@@ -71,7 +57,7 @@ function CheckForWinner(board) {
 
   // Check for main diagonal win
   if (
-    board[0] != UNOCCUPIED &&
+    board[0] !== UNOCCUPIED &&
     board[0] === board[5] &&
     board[0] === board[10] &&
     board[0] === board[15]
@@ -80,12 +66,26 @@ function CheckForWinner(board) {
   }
   // Check for secondary diagonal win
   if (
-    board[3] != UNOCCUPIED &&
+    board[3] !== UNOCCUPIED &&
     board[3] === board[6] &&
     board[3] === board[9] &&
     board[3] === board[12]
   ) {
     return board[3] == USER_PLAYER ? 2 : 3;
+  }
+
+  // Check for square wins
+  for (i = 0; i <= 10; i++) {
+    if (i == 3 || i == 7) {
+      i++;
+    }
+    if (
+      board[i] !== UNOCCUPIED &&
+      board[i] === board[i + 1] &&
+      board[i] === board[i + 4] &&
+      board[i] === board[i + 5]
+    )
+      return board[i] == USER_PLAYER ? 2 : 3;
   }
 
   // Game is not over
