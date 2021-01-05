@@ -1,5 +1,5 @@
 // This is a Service Worker, caches assets for offline use
-var cacheName = "tactoe16sw-v1";
+var cacheName = "tactoe16sw-v1.1";
 var assets = [
   "/",
   "/index.html",
