@@ -16,9 +16,12 @@ self.onmessage = (e) => {
 //#region COMPUTER class
 
 class Computer {
-  // PRIVATE: COMPUTER move used in COMPUTER algorithm
+  // PRIVATE: COMPUTER move used in algorithm
   static #choice = [];
+
+  // PRIVATE: Inception level limit used in COMPUTER algorithm
   static #depthLimit = 8;
+
   // MAIN: function for triggering COMPUTER algorithm
   static Play() {
     let availableMoves = GetAvailableMoves(BOARD);
@@ -40,6 +43,7 @@ class Computer {
     if (CheckForWinner(node) !== 0 || depth > this.#depthLimit)
       return this.#gameScore(node, depth);
 
+    // Simulation setup
     depth += 1;
     var availableMoves = GetAvailableMoves(node);
     var move, result, possible_game;
