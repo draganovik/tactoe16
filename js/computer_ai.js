@@ -19,14 +19,14 @@ class Computer {
   // PRIVATE: COMPUTER move used in algorithm
   static #choice = [];
 
-  // PRIVATE: Inception level limit used in COMPUTER algorithm
+  // PRIVATE: Simulation level limit used in COMPUTER algorithm
   static #depthLimit = 8;
 
   // MAIN: function for triggering COMPUTER algorithm
   static Play() {
     let availableMoves = GetAvailableMoves(BOARD);
     if (availableMoves.length == 16) {
-      // Pick random move if playing first
+      // Pick a random move if playing first
       this.#choice =
         availableMoves[Math.round(Math.random() * availableMoves.length)];
     } else {
@@ -39,7 +39,7 @@ class Computer {
 
   // PRIVATE: Alpha–beta pruning algorithm for searching the best move
   static #alphaBetaMinimax(node, depth, alpha, beta) {
-    // if game is over or too long, return simulation score
+    // If game is over or too long, return simulation score
     if (CheckForWinner(node) !== 0 || depth > this.#depthLimit)
       return this.#gameScore(node, depth);
 
@@ -54,7 +54,7 @@ class Computer {
         move = availableMoves[i];
         // Create new BOARD simulation (node) with added move
         possible_game = this.#getNewState(move, node);
-        // Get simulation score
+        // Get new simulation score
         result = this.#alphaBetaMinimax(possible_game, depth, alpha, beta);
         // Reset node
         node = this.#undoMove(node, move);
@@ -98,7 +98,7 @@ class Computer {
     else if (score === 2) return depth - 16;
     // USER wins
     else if (score === 3) return 16 - depth;
-    // Simulation is to deep
+    // Simulation is too deep
     else if (score === 0) return 0;
   }
 

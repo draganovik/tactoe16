@@ -6,7 +6,7 @@ var USER_PLAYER = "X";
 var COMPUTER_PLAYER = "O";
 var ACTIVE_TURN = "USER";
 
-// Gets a array of moves not claimed by eather player
+// Gets an array of moves not claimed by either player
 function GetAvailableMoves(board) {
   var possibleMoves = new Array();
   for (var i = 0; i < BOARD_SIZE; i++) {
@@ -92,6 +92,6 @@ function CheckForWinner(board) {
   for (i = 0; i < BOARD_SIZE; i++) {
     if (board[i] === UNOCCUPIED) return 0;
   }
-  // It's tie
+  // It is a tie
   return 1;
 }

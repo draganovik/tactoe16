@@ -1,18 +1,21 @@
 // NOTE: /game.js uses variables and functions from /shared.js
 
-// Using COMPUTER as Web Worker will allow us to move its opetarions to its own thread
+// Using COMPUTER as Web Worker will allow us to move its operations to its own thread
 var COMPUTER = new Worker("js/computer_ai.js");
 
 COMPUTER.onmessage = (e) => {
   // Get the COMPUTER calculated move after COMPUTER.postMessage() is called and play it
   setTimeout(() => {
     MakeMove(e.data);
-  }, 50);
+  }, 100);
 };
 
-// This function sets up the enviroment
+// This function sets up the environment
 function NewGame() {
   if (ACTIVE_TURN == "USER" || GameOver(BOARD)) {
+    // Set BOARD HTML color to busy
+    document.getElementsByTagName("MAIN")[0].classList.add("busy");
+    // Disable button
     document.getElementById("btnNewGame").disabled = true;
     ShowMessage("Setting up new game...");
     CleanBoard();
@@ -45,6 +48,9 @@ function ShufflePlayOrder() {
       // Give COMPUTER data it needs to calculate move
       COMPUTER.postMessage([BOARD, USER_PLAYER, COMPUTER_PLAYER, ACTIVE_TURN]);
     }, 600);
+  } else {
+    // USER plays first set BOARD HTML color to active
+    document.getElementsByTagName("MAIN")[0].classList.remove("busy");
   }
 }
 
@@ -52,6 +58,8 @@ function ShufflePlayOrder() {
 function PlayUser(position) {
   if (ACTIVE_TURN == "USER") {
     if (MakeMove(position)) {
+      // It's COMPUTER's turn, set BOARD HTML color to busy
+      document.getElementsByTagName("MAIN")[0].classList.add("busy");
       // If USER made move on 'position', give COMPUTER data it needs to calculate its move
       COMPUTER.postMessage([BOARD, USER_PLAYER, COMPUTER_PLAYER, ACTIVE_TURN]);
     }
@@ -84,12 +92,16 @@ function ShowMessage(message, winner) {
 
 // Changes message in notification bar depending on ACTIVE_TURN
 function GetEndTurnMessage(ACTIVE_TURN) {
-  ACTIVE_TURN == "USER"
-    ? ShowMessage("Your turn!")
-    : ShowMessage("Computer is thinking...");
+  if (ACTIVE_TURN == "USER") {
+    ShowMessage("Your turn!");
+    // It is USER's turn, set BOARD HTML color to active
+    document.getElementsByTagName("MAIN")[0].classList.remove("busy");
+  } else {
+    ShowMessage("Computer is thinking...");
+  }
 }
 
-// Universal function for seting USER and COMPUTER moves
+// Universal function for setting USER and COMPUTER moves
 function MakeMove(position) {
   if (!GameOver(BOARD) && BOARD[position] === UNOCCUPIED) {
     let PLAYER = GetPlayerSymbol();
@@ -115,7 +127,7 @@ function RenderMove(position, player) {
 function GameOver(board) {
   switch (CheckForWinner(board)) {
     case 1:
-      ShowMessage("It's a tie!", UNOCCUPIED);
+      ShowMessage("It's tie!", UNOCCUPIED);
       break;
     case 2:
       ShowMessage("You win! Congratulations!", USER_PLAYER);
@@ -126,5 +138,7 @@ function GameOver(board) {
     default:
       return false;
   }
+  // Game is over, return true and set BOARD HTML color to busy
+  document.getElementsByTagName("MAIN")[0].classList.add("busy");
   return true;
 }
