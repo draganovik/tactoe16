@@ -74,6 +74,12 @@ button {
   color: #e1e6eb;
   font-size: 0.8rem;
   outline: none;
+  transition-duration: 0.3s;
+}
+button:disabled,
+button[disabled] {
+  color: #727272;
+  background-color: #373737;
 }
 figure:active {
   background-color: #7491b0;

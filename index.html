@@ -47,8 +47,12 @@
       <figure id="f14" onclick="PlayUser(14)"></figure>
       <figure id="f15" onclick="PlayUser(15)"></figure>
     </main>
-    <button onclick="NewGame()">New Game</button>
+    <button id="btnNewGame" onclick="NewGame()">New Game</button>
+    <script type="text/javascript" src="js/graphics.js"></script>
+    <script type="text/javascript" src="js/shared.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
     <script>
+      // This will register /sw.js
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("/sw.js")
@@ -56,7 +60,5 @@
           .catch((err) => console.log("ERROR: Service Worker not registered"));
       }
     </script>
-    <script type="text/javascript" src="js/player_graphics.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
   </body>
 </html>
