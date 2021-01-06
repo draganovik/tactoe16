@@ -9,7 +9,7 @@ self.onmessage = (e) => {
   COMPUTER_PLAYER = e.data[2];
   ACTIVE_TURN = e.data[3];
   // Calculate move
-  var move = Computer.Play();
+  var move = Computer.Play(e.data[4]);
   self.postMessage(move);
 };
 
@@ -23,20 +23,63 @@ class Computer {
   static #depthLimit = 9;
 
   // MAIN: function for triggering COMPUTER algorithm
-  static Play() {
+  static Play(userMove) {
     let availableMoves = GetAvailableMoves(BOARD);
     if (availableMoves.length == 16) {
       // Pick a random move if playing first
       this.#choice =
         availableMoves[Math.round(Math.random() * availableMoves.length)];
+    } else if (availableMoves.length == 15 && userMove != undefined) {
+      // If COMPUTER is playing secund, speed up the calculation
+      this.#getStaticMove(userMove);
     } else {
-      // Get best move
+      // Set this.#choice to best move
       this.#alphaBetaMinimax(BOARD, 0, -Infinity, +Infinity);
     }
     // FAILSAFE if setting this.#choice breaks get the first UNOCCUPIED field
     return this.#choice ? this.#choice : availableMoves[0];
   }
-
+  // PRIVATE: Override COMPUTER second move to speed up process
+  static #getStaticMove(userMove) {
+    switch (userMove) {
+      case 5:
+        this.#choice = 6;
+        break;
+      case 6:
+        this.#choice = 5;
+        break;
+      case 7:
+        this.#choice = 1;
+        break;
+      case 8:
+        this.#choice = 4;
+        break;
+      case 9:
+        this.#choice = 5;
+        break;
+      case 10:
+        this.#choice = 5;
+        break;
+      case 11:
+        this.#choice = 5;
+        break;
+      case 12:
+        this.#choice = 2;
+        break;
+      case 13:
+        this.#choice = 1;
+        break;
+      case 14:
+        this.#choice = 2;
+        break;
+      case 15:
+        this.#choice = 0;
+        break;
+      default:
+        this.#alphaBetaMinimax(BOARD, 0, -Infinity, +Infinity);
+        break;
+    }
+  }
   // PRIVATE: Alpha–beta pruning algorithm for searching the best move
   static #alphaBetaMinimax(node, depth, alpha, beta) {
     // If game is over or too long, return simulation score

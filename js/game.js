@@ -61,7 +61,13 @@ function PlayUser(position) {
       // It's COMPUTER's turn, set BOARD HTML color to busy
       document.getElementsByTagName("MAIN")[0].classList.add("busy");
       // If USER made move on 'position', give COMPUTER data it needs to calculate its move
-      COMPUTER.postMessage([BOARD, USER_PLAYER, COMPUTER_PLAYER, ACTIVE_TURN]);
+      COMPUTER.postMessage([
+        BOARD,
+        USER_PLAYER,
+        COMPUTER_PLAYER,
+        ACTIVE_TURN,
+        position,
+      ]);
     }
   }
 }
