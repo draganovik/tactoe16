@@ -7,7 +7,7 @@
 3. Otvoriti folder/repozitorijum u Visual Studio Code (File -> Open)
 4. Desni klik na /index.html i izabrati opciju "Open with Live Server"
 
-<img src="https://raw.githubusercontent.com/draganovik/legacy/master/Screenshot%202021-01-05%20at%2002.37.40.png" alt="Open with Live Server Visual aid" width="350"/>
+<img src="https://draganovik.github.io/legacy/Screenshot%202021-01-05%20at%2002.37.40.png" alt="Open with Live Server visual aid" width="350"/>
 
 #### Obrazloženje
 
