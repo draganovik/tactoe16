@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "dev.mladen.tactoe16.twa",
+                     "sha256_cert_fingerprints": ["6F:32:B8:39:26:8F:D0:99:8B:27:8E:B3:92:67:79:C3:9D:0C:00:1B:20:70:DD:BD:EB:3C:98:D4:B9:6E:D1:D4"] }
+      }
+]
