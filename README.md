@@ -1,4 +1,4 @@
-# TacToe16 - Christmas Challenge Submission
+# TacToe16 - Christmas 2020 DressCode.ing Challenge
 
 ### Kako pokrenuti na lokalnoj mašini:
 
