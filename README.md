@@ -12,6 +12,6 @@
 #### Obrazloženje
 
 TacToe16 koristi [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) tehnologiju i neophodno je pokrenuti veb-sajt na serveru.
-Na lokalnom računaru ovo možemo postići pomoću ekstenzije za Visual Studio Code [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+Na lokalnom računaru ovo možemo postići pomoću ekstenzije za Visual Studio Code [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
 ###### TacToe16 je takođe funkcionalan na domenu https://tactoe16.mladen.dev
